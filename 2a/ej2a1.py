@@ -24,10 +24,18 @@ import numpy as np
 
 
 def simulate_dice_rolls(number: int) -> dict:
-    # Write here your code
-    pass
+    """Entra un número, de veces que un dado se lanza. Devuelve resultados con probabilidades"""
+    datos = np.random.randint(1, 7, size=number)
+    resultados = {}
+    #Bucle, se le añade al diccionario, un número del 1 al 6, cuyavo valor es la suma total de las veces que aparece
+    #en datos, divido entre el número de tiradas
+    for i in range(1, 7):
+        resultados[i] = np.sum(datos == i) / number
+    return resultados
+
+
 
 
 # Si quieres probar tu código, descomenta las siguientes líneas y ejecuta el script
-# num_rolls = 10000
-# print(simulate_dice_rolls(num_rolls))
+num_rolls = 10000
+print(simulate_dice_rolls(num_rolls))

@@ -48,28 +48,34 @@ import typing as t
 
 
 def create_matrices() -> t.Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    # Write here your code
-    pass
+    matriz_cero = np.zeros((3, 3))
+    matriz_uno = np.ones((2, 4))
+    matriz_identidad = np.identity(4)
+    return (matriz_cero, matriz_uno, matriz_identidad)
+    
 
 
-def manipulate_matrices(
-    zeros_matrix: np.ndarray, ones_matrix: np.ndarray, identity_matrix: np.ndarray
+def manipulate_matrices(zeros_matrix: np.ndarray, ones_matrix: np.ndarray, identity_matrix: np.ndarray
 ) -> t.Tuple[np.ndarray, np.ndarray, np.ndarray]:
-    # Write here your code
-    pass
+    zeros_matrix[1, 1] = 5
+    ones_matrix[:,2] = 3
+    for i in range(identity_matrix.shape[0]):
+        identity_matrix[i, identity_matrix.shape[0] -1 -i] = 2
+    return zeros_matrix, ones_matrix, identity_matrix
+    
 
 
 # Para probar el código:
-# zeros_matrix, ones_matrix, identity_matrix = create_matrices()
-# print("Matriz de ceros creada:\n", zeros_matrix)
-# print("Matriz de unos creada:\n", ones_matrix)
-# print("Matriz identidad creada:\n", identity_matrix)
-# print("*" * 50)
-# zeros_matrix_modif, ones_matrix_modif, identity_matrix_modif = manipulate_matrices(
-#     zeros_matrix,
-#     ones_matrix,
-#     identity_matrix
-# )
-# print("Matriz de ceros modificada:\n", zeros_matrix_modif)
-# print("Matriz de unos modificada:\n", ones_matrix_modif)
-# print("Matriz identidad modificada:\n", identity_matrix_modif)
+zeros_matrix, ones_matrix, identity_matrix = create_matrices()
+print("Matriz de ceros creada:\n", zeros_matrix)
+print("Matriz de unos creada:\n", ones_matrix)
+print("Matriz identidad creada:\n", identity_matrix)
+print("*" * 50)
+zeros_matrix_modif, ones_matrix_modif, identity_matrix_modif = manipulate_matrices(
+     zeros_matrix,
+     ones_matrix,
+     identity_matrix
+ )
+print("Matriz de ceros modificada:\n", zeros_matrix_modif)
+print("Matriz de unos modificada:\n", ones_matrix_modif)
+print("Matriz identidad modificada:\n", identity_matrix_modif)

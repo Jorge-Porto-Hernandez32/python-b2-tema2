@@ -55,17 +55,50 @@ import typing as t
 def compare_monthly_sales(
     sales_year1: list, sales_year2: list, sales_year3: list, months: list
 ) -> t.Tuple[plt.Figure, plt.Axes, plt.Axes]:
-    # Write here your code
-    pass
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize = (12, 6))
+
+    x = np.arange(len(months))
+    width = 0.4
+    
+    ax1.bar(x-width/2, sales_year1, width=width, label = "2020")
+    ax1.bar(x + width/2, sales_year2, width=width, label = "2021")
+
+    ax1.set_xticks(x)
+    ax1.set_xticklabels(months)
+    ax1.set_ylabel("Ventas mensuales")
+    ax1.set_title("Monthly Sales Comparason: 2020 vs 2021")
+    
+
+    ax1_secundario = ax1.twinx()
+
+    cumulative_2020 = np.cumsum(sales_year1)
+    cumulative_2021 = np.cumsum(sales_year2)
+
+    ax1_secundario.plot(x, cumulative_2020, color="green", marker ="o", label = "Acumulado 2020")
+    ax1_secundario.plot(x, cumulative_2021, color = "blue", marker="o", label = "Acumulado 2021")
+
+    ax1_secundario.set_ylabel("Ventas acumuladas")
+    
+    ax1.legend(loc = "upper left")
+    ax2.legend(loc = "upper right")
+
+    fig2, ax3 = plt.subplots()
+
+    ax2.pie(sales_year3, labels=months, autopct="%1.1f%%")
+
+    ax2.set_title("Monthly Sales Distribution for 2022")
+
+    return fig, ax1, ax2
 
 
 # Para probar el código, descomenta las siguientes líneas
-# sales_2020 = np.random.randint(100, 500, 12)
-# sales_2021 = np.random.randint(100, 500, 12)
-# sales_2022 = np.random.randint(100, 500, 12)
-# months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+sales_2020 = np.random.randint(100, 500, 12)
+sales_2021 = np.random.randint(100, 500, 12)
+sales_2022 = np.random.randint(100, 500, 12)
+months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
 
-# if __name__ == "__main__":
-#     fig, ax1, ax2 = compare_monthly_sales(sales_2020, sales_2021, sales_2022, months)
-#     plt.show()
+if __name__ == "__main__":
+     fig, ax1, ax2 = compare_monthly_sales(sales_2020, sales_2021, sales_2022, months)
+     plt.show()
